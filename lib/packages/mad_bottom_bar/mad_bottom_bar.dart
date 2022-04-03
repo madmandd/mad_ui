@@ -1,3 +1,4 @@
+library mad_bottom_bar;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
