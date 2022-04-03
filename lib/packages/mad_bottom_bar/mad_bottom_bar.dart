@@ -128,12 +128,11 @@ class _MadBottomBarState extends State<MadBottomBar>
 
   @override
   void initState() {
+    super.initState();
+    
     isScrollingDown = widget.reverse;
     isOnTop = !widget.reverse;
-
-    // myScroll();
-
-    super.initState();
+    scrollingBehavior();
     _controller = AnimationController(vsync: this, duration: widget.duration);
     _offsetAnimation = Tween<Offset>(
       begin: Offset(0, widget.start),
@@ -147,13 +146,12 @@ class _MadBottomBarState extends State<MadBottomBar>
           setState(() {});
         }
       });
-
     _controller.forward();
   }
 
   /// Fnc [showBottomBar] `Controller` that show your `BottomBar` on `onBottomBarShown`
   void showBottomBar() {
-    if (mounted) {
+        if (mounted) {
       setState(() {
         _controller.forward();
       });
@@ -163,18 +161,17 @@ class _MadBottomBarState extends State<MadBottomBar>
 
   /// Fnc [hideBottomBar] `Controller` that hide your `BottomBar` on `onBottomBarHidden`
   void hideBottomBar() {
-    if (mounted && widget.hideOnScroll) {
+        if (mounted && widget.hideOnScroll) {
       setState(() {
         _controller.reverse();
       });
     }
-
     if (widget.onBottomBarHidden != null) widget.onBottomBarHidden!();
   }
 
   /// [scrollingBehavior] depends on how user interact with `ScrollDirection` position.
   Future<void> scrollingBehavior() async {
-    scrollBottomBarController.addListener(() {
+     scrollBottomBarController.addListener(() {
       if (!widget.reverse) {
         if (scrollBottomBarController.position.userScrollDirection ==
             ScrollDirection.reverse) {

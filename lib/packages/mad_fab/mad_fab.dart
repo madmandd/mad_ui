@@ -32,7 +32,7 @@ class MadFab extends StatefulWidget {
   final Widget? child;
   final VoidCallback? onOpen;
   final VoidCallback? onClose;
-  final VoidCallback onPress;
+  final VoidCallback onPressed;
   final bool? overlayVisible;
   final int? speed;
   final String? title;
@@ -59,7 +59,7 @@ class MadFab extends StatefulWidget {
     this.marginBottom = 0.0,
     this.marginLeft = 16.0,
     this.marginRight = 0.0,
-    required this.onPress,
+    required this.onPressed,
     this.onClose,
     this.onOpen,
     this.overlayVisible = false,
@@ -197,7 +197,7 @@ class _MadFabState extends State<MadFab> with SingleTickerProviderStateMixin{
       elevation: widget.elevation,
       onLongPress: _toggleChildren,
       onTap:
-          (_open || widget.onPress == null) ? _toggleChildren : widget.onPress,
+          (_open || widget.onPressed == null) ? _toggleChildren : widget.onPressed,
       child: child,
       shape: widget.shape,
     );
@@ -225,6 +225,18 @@ class _MadFabState extends State<MadFab> with SingleTickerProviderStateMixin{
                 ),
               ),
             ),
+            Align(
+              alignment: widget.alignment!,
+              child: Container(
+                padding: EdgeInsets.only(
+                  left: widget.paddingLeft!,
+                  right: widget.paddingRight!,
+                  top: 8.0 + widget.paddingTop!,
+
+                ),
+                child: animatedFab,
+              ),
+            )
           ],
         ),
       ),
